@@ -146,6 +146,49 @@ $(function () {
     $(".btn-tag").append(_addKey("體育"));
     /* bind submit event */
     $btnSubmit.click(function () {
+        let $tag = currKey();
+        if ($tag == null) {
+            alert("Select one key to search");
+            return;
+        }
+
+        let $text_id = $("#row-text-data-id").data("id");
+        let $tags = $(".select2").val();
+        console.log("init_select:",$(".select2").val());
+        console.log("init_id:",$("#row-text-data-id").data("id"));
+        console.log("tag:",$tag);
+        //送資料出去
+        //新的文章
+        var url = "http://localhost:5000/submit";
+        var data = {
+            data: JSON.stringify({
+                'tag': $tag,
+                'tags': $tags,
+                'text_id': $text_id,
+            }),
+        }
+        $.ajax({
+            method: "POST",
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+            },
+            url: url,
+            dataType: "json",
+            data: data,
+            async: false,
+            success: function (data) {
+                $(".select2").val(null).trigger('change');
+                console.log(data)
+            },
+            error: function () {
+                // alert("submit error ajax");
+                console.log("---");
+                console.log("submit error ajax");
+                console.log("---");
+            },
+        })
+
+
         //新的文章
         var url = "http://localhost:5000/get_document";
         $.ajax({
@@ -157,7 +200,21 @@ $(function () {
             dataType: "json",
             async: false,
             success: function (data) {
+                $("#row-text-data").empty();
                 console.log(data);
+                let $category = data['category'];
+                let $tag = data['tag'];
+                let $id = data['text_id'];
+                let $text = data['text'];
+                let $textbar = `
+                <div id="row-text-data-id" data-id="${$id}">
+                <h3>${$category}</h3>
+                <span class="badge badge-info">${$tag}</span>
+                </div>`;
+                
+                $("#row-text-data").append($textbar);
+                $("#row-tex-p").text($text);
+                
             },
             error: function () {
                 alert("get_document error ajax");
