@@ -141,6 +141,39 @@ $(function () {
             console.log("---");
         },
     })
+    var url = domin + "/get_document";
+        $.ajax({
+            method: "GET",
+            headers: {
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+            },
+            url: url,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $("#row-text-data").empty();
+                console.log(data);
+                let $category = data['category'];
+                let $tag = data['tag'];
+                let $id = data['text_id'];
+                let $text = data['text'];
+                let $textbar = `
+                <div id="row-text-data-id" data-id="${$id}">
+                <h3>${$category}</h3>
+                <span class="badge badge-info">${$tag}</span>
+                </div>`;
+                
+                $("#row-text-data").append($textbar);
+                $("#row-tex-p").text($text);
+                
+            },
+            error: function () {
+                alert("get_document error ajax");
+                console.log("---");
+                console.log("get_document error ajax");
+                console.log("---");
+            },
+        })
     $(".btn-tag").append(_addKey("3C"));
     $(".btn-tag").append(_addKey("政治"));
     $(".btn-tag").append(_addKey("體育"));
