@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify 
+from flask import Flask, request, jsonify, render_template, url_for
 from search import search
 from delete import delete
 from tags_search import tags_search
@@ -14,7 +14,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return render_template('index.html')
 
 @app.route("/search", methods=['POST'])
 @cross_origin()

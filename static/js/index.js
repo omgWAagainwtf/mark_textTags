@@ -3,10 +3,10 @@ const unselectedTagClz = "btn-light";
 let tagIdCounter = 0;
 let currTag = null;
 let tagsMap = new Map();
-
+let domin = "http://localhost:5000"
 // pages function
 function btn_search(tag, num) {
-    var url = "http://localhost:5000/search";
+    var url = domin + "/search";
     var data = {
         data: JSON.stringify({
             'tag': tag,
@@ -75,7 +75,7 @@ function btn_search(tag, num) {
                         'text_id': now_row_show_id,
                     }),
                 }
-                var url_delete = "http://localhost:5000/delete";
+                var url_delete = domin + "/delete";
                 $.ajax({
                     method: "POST",
                     headers: {
@@ -119,7 +119,7 @@ $(function () {
         if (e.keyCode === 13) _addKey();
     });
 
-    var url = "http://localhost:5000/init";
+    var url = domin + "/init";
     $.ajax({
         method: "GET",
         headers: {
@@ -159,7 +159,7 @@ $(function () {
         console.log("tag:",$tag);
         //送資料出去
         //新的文章
-        var url = "http://localhost:5000/submit";
+        var url = domin + "/submit";
         var data = {
             data: JSON.stringify({
                 'tag': $tag,
@@ -190,7 +190,7 @@ $(function () {
 
 
         //新的文章
-        var url = "http://localhost:5000/get_document";
+        var url = domin + "/get_document";
         $.ajax({
             method: "GET",
             headers: {
@@ -367,7 +367,7 @@ function getSelections() {
 
 // tags
 function tags_search(tag, num) {
-    var url = "http://localhost:5000/tags_search";
+    var url = domin + "/tags_search";
     var data = {
         data: JSON.stringify({
             'tag': tag,
