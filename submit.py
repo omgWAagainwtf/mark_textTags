@@ -24,5 +24,4 @@ def submit(category,tags,text_id):
     keywords = {"keywords":keyword}
     res = gp.Update(db=db_name,rid=rid,new_record=keywords,modify_all=False,record_format='json')
     print(res)
-    return res
-# submit('政治',['北韓','社運人士'],'8e7a42ae-16a4-11ea-ba07-2c4d54c22a5f')
+submit('政治',['北韓','社運人士'],'8e7a42ae-16a4-11ea-ba07-2c4d54c22a5f')

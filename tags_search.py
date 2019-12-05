@@ -15,4 +15,4 @@ def tags_search(cur_category,cur_page):
     end_pos = len(tags) if((cur_page * 10) > len(tags)) else cur_page * 10
     print(start_pos,end_pos)
     return {"tags":tags[start_pos:end_pos],"pages":total_page}
-# print(tags_search('政治',2))
+print(tags_search('政治',2))

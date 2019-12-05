@@ -18,4 +18,4 @@ def search(cur_category,cur_page):
 
     total_page = math.ceil(ret['cnt']/10)
     return {"text":document,"tag":keywords,"text_id":text_id,"category":category,"pages":total_page}
-# print(search('政治',1))
+print(search('政治',1))
